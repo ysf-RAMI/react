@@ -5,17 +5,19 @@ import { useInView } from "react-intersection-observer";
 import "../styles/Home.css";
 import { moduleContext } from "../Context/ModuleContext";
 
-// Reusable AnimatedCard Component
 const AnimatedCard = ({ children }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: true });
 
   React.useEffect(() => {
-    window.scroll(0, 0);
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+  React.useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
